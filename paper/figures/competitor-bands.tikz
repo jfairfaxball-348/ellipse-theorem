@@ -1,0 +1,16 @@
+\begin{tikzpicture}[x=0.71cm,y=0.71cm,>=stealth]
+\draw[thick,->] (0,0) -- (12.1,0);
+\fill[gray!8] (0,0.12) rectangle (3.5,.8);
+\fill[gray!24] (3.5,.12) rectangle (8.5,.8);
+\fill[gray!8] (8.5,.12) rectangle (12,.8);
+\draw[dashed] (3.5,-.28) -- (3.5,1.1);
+\draw[dashed] (8.5,-.28) -- (8.5,1.1);
+\node[font=\small] at (1.75,.46) {forward (A)};
+\node[font=\small] at (6,.46) {central (B)};
+\node[font=\small] at (10.25,.46) {backward (C)};
+\node[below,font=\scriptsize] at (0,0) {$0$};
+\node[below,font=\scriptsize] at (3.5,0) {$\Lambda$};
+\node[below,font=\scriptsize] at (8.5,0) {$2\pi-\Lambda$};
+\node[below,font=\scriptsize] at (12,0) {$2\pi$};
+\node[above,font=\scriptsize] at (6,1.0) {both boundary values belong to (B)};
+\end{tikzpicture}
