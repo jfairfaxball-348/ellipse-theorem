@@ -216,15 +216,15 @@ Every finite distinct boundary subset is strictly convex. At each stage with at 
 The metric-ear proof is constructive, not merely existential. In the notation of Lemma~\ref{lem:uniform}, an eligible site is one whose current cyclic-neighbour span satisfies $s_i<\Lambda$, and its priority is the squared Euclidean skip-chord length $L_i^2=\dist{v_{i-1}}{v_{i+1}}^2$. The squared length gives the same minimisers as $L_i$ and avoids square roots.
 
 \begin{proposition}[Algorithmic corollary]\label{prop:algorithm}
-Given $a\ge b>0$ with $a/b\le\Rbound$ and $n\ge3$ distinct Cartesian-coordinate sites on $\Ell$, a plane nearest-two order can be constructed in $O(n\log n)$ time and $O(n)$ auxiliary space in the exact real-arithmetic comparison model.
+Given $a\ge b>0$ with $a/b\le\Rbound$ and $n\ge3$ distinct Cartesian-coordinate sites on $\Ell$, a plane nearest-two order together with all its $2n-3$ compulsory edges can be constructed in $O(n\log n)$ time and $O(n)$ auxiliary space in the exact real-arithmetic comparison model.
 \end{proposition}
 
 \noindent\textbf{Algorithm (cyclic ear deletion and reversal).}
 \begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=3pt]
 \item Sort the sites cyclically about the ellipse centre and put them into a circular doubly linked list.
 \item For each site in the current list, test eligibility $s_i<\Lambda$. Insert each eligible site into a min-priority queue keyed by $L_i^2$, breaking equal keys by Cartesian-lexicographic site coordinates.
-\item While more than four sites survive, extract a minimum-key eligible site $v_i$, record it, and delete it from the circular list. Recompute eligibility and priority for its two surviving cyclic neighbours, updating their queue entries. Invalidated entries may instead be discarded lazily using version counters.
-\item Order the final three or four sites by Proposition~\ref{prop:four}, then append the recorded deleted sites in reverse deletion order.
+\item While more than four sites survive, extract a minimum-key eligible site $v_i$, record it together with its two current cyclic neighbours, and delete it from the circular list. Recompute eligibility and priority for its two surviving cyclic neighbours, updating their queue entries. Invalidated entries may instead be discarded lazily using version counters.
+\item Order the final three or four sites by Proposition~\ref{prop:four}, then append the recorded deleted sites in reverse deletion order, outputting their two stored compulsory neighbour edges as they are reinserted.
 \end{enumerate}
 
 \begin{proof}
@@ -245,7 +245,7 @@ Because $0<\Lambda\le\pi$ and $0<s_i<2\pi$, the eligibility test is exactly
 \end{equation}
 The determinant specifies the positively oriented arc of length less than $\pi$, and the dot product gives the remaining strict cutoff. In particular, equality at $s_i=\Lambda$ is \emph{ineligible}, as in the proof above. The initial cyclic sort can likewise be carried out with half-plane and determinant comparisons, without evaluating inverse trigonometric functions. All these tests, and the squared-distance priorities, use a constant number of exact real-arithmetic operations and comparisons.
 
-Deleting $v_i$ changes the cyclic neighbours, hence the eligibility and priority, of only its immediate surviving predecessor and successor. Each of the at most $n-4$ deletions therefore causes $O(1)$ queue updates. There are $O(n)$ total queue insertions and removals, each costing $O(\log n)$, and the initial cyclic sort costs $O(n\log n)$. The final three- or four-site construction and the reversal cost $O(n)$ overall. The linked list, queue, deletion stack and output order each use $O(n)$ space. This is an exact real-arithmetic bound; no bit-complexity claim is made for arbitrary real input coordinates.
+Deleting $v_i$ changes the cyclic neighbours, hence the eligibility and priority, of only its immediate surviving predecessor and successor. Each of the at most $n-4$ deletions therefore causes $O(1)$ queue updates. There are $O(n)$ total queue insertions and removals, each costing $O(\log n)$, and the initial cyclic sort costs $O(n\log n)$. The final three- or four-site construction, reversal, and output of all $2n-3$ edges cost $O(n)$ overall. The linked list, queue, deletion stack and output order each use $O(n)$ space. This is an exact real-arithmetic bound; no bit-complexity claim is made for arbitrary real input coordinates.
 \end{proof}
 
 \section{A noncircular universal corollary}\label{sec:corollary}
