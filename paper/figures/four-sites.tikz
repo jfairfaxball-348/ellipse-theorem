@@ -1,0 +1,22 @@
+\begin{tikzpicture}[x=.81cm,y=.81cm,line cap=round]
+\draw[gray!65,line width=.75pt] (0,0) -- (4,0);
+\draw[gray!65,line width=.75pt] (4,0) -- (0.7,3.4);
+\draw[gray!65,line width=.75pt] (0.7,3.4) -- (0,0);
+\draw[black,line width=1.15pt] (0.8,0.9) -- (0,0);
+\draw[black,line width=1.15pt] (0.8,0.9) -- (0.7,3.4);
+\fill (0,0) circle (.052);\node[below,font=\scriptsize] at (0,0) {$A$};
+\fill (4,0) circle (.052);\node[below,font=\scriptsize] at (4,0) {$B$};
+\fill (0.7,3.4) circle (.052);\node[above,font=\scriptsize] at (0.7,3.4) {$C$};
+\fill (0.8,0.9) circle (.052);\node[above,font=\scriptsize] at (0.8,0.9) {$D$};
+\node[below,font=\small] at (2,-0.50) {interior fourth site};
+\draw[gray!65,line width=.75pt] (5.8,0) -- (10.3,0);
+\draw[gray!65,line width=.75pt] (10.3,0) -- (6.2,2.7);
+\draw[gray!65,line width=.75pt] (6.2,2.7) -- (5.8,0);
+\draw[black,line width=1.15pt] (9.6,3.2) -- (10.3,0);
+\draw[black,line width=1.15pt] (9.6,3.2) -- (6.2,2.7);
+\fill (5.8,0) circle (.052);\node[below,font=\scriptsize] at (5.8,0) {$A$};
+\fill (10.3,0) circle (.052);\node[below,font=\scriptsize] at (10.3,0) {$B$};
+\fill (9.6,3.2) circle (.052);\node[above,font=\scriptsize] at (9.6,3.2) {$C$};
+\fill (6.2,2.7) circle (.052);\node[above,font=\scriptsize] at (6.2,2.7) {$D$};
+\node[below,font=\small] at (7.8,-0.50) {convex quadrilateral};
+\end{tikzpicture}

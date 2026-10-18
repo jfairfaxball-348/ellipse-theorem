@@ -1,0 +1,22 @@
+\begin{tikzpicture}[scale=2.30,line cap=round]
+\draw[gray!55] (0,0) ellipse (1.01 and 1);
+\draw[gray!60] (1.01,0.0) -- (0.808,0.6) -- (-0.67680412371134021,0.7422680412371134) -- (-0.6792645228895147,0.74006156264326413) -- (-0.67680412371134021,-0.7422680412371134) -- cycle;
+\draw[very thick] (-0.67680412371134021,0.7422680412371134) -- (-0.67680412371134021,-0.7422680412371134);
+\draw[densely dashed,line width=1.0pt] (-0.67680412371134021,0.7422680412371134) -- (0.808,0.6);
+\fill (1.01,0.0) circle (.023);
+\node[font=\scriptsize,fill=white,inner sep=1pt] at (1.2,0.0) {$P_0$};
+\fill (0.808,0.6) circle (.023);
+\node[font=\scriptsize,fill=white,inner sep=1pt] at (0.96342306439642318,0.71541316663100731) {$P_1$};
+\fill (-0.67680412371134021,0.7422680412371134) circle (.023);
+\fill (-0.6792645228895147,0.74006156264326413) circle (.023);
+\fill (-0.67680412371134021,-0.7422680412371134) circle (.023);
+\node[font=\scriptsize,fill=white,inner sep=1pt] at (-0.80852440857428697,-0.88672897817743583) {$P_4$};
+\node[font=\scriptsize,fill=white,inner sep=1pt] at (-.92,1.29) {$P_2,P_3$ (close)};
+\draw[densely dotted] (-.683,.735) -- (-1.25,.9);
+\draw[gray!70,rounded corners,fill=white] (-3.0,.20) rectangle (-1.25,1.55);
+\node[font=\scriptsize] at (-2.13,1.37) {local detail ($120\times$)};
+\fill (-2.26,.95) circle (.031);
+\fill (-2.55,.69) circle (.031);
+\node[font=\scriptsize,above right] at (-2.26,.95) {$P_2$};
+\node[font=\scriptsize,below left] at (-2.55,.69) {$P_3$};
+\end{tikzpicture}
