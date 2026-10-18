@@ -26,7 +26,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We prove that, for every finite set of at least three distinct sites on an ellipse of semiaxes $0<b\le a$ with $a/b\le\sqrt{2/\sin(2\pi/5)-1}$, the sites can be ordered so that the first three form a triangle and each subsequent site is joined to \emph{exactly its two closest earlier sites}, with every edge retained and no two edges properly crossing. Equality in the aspect-ratio bound is included; no separation or cardinality restriction is imposed. The ordering uses Euclidean distance with Cartesian-lexicographic tie-breaking. We establish a necessary-and-sufficient recursive metric-ear criterion for strictly convex finite sets, elementary three- and four-site foundations, and a signed short-arc ellipse-chord inequality. In particular, the universally admissible ellipses include a noncircle of aspect ratio $101/100$. The displayed ratio bound is sufficient; sharpness and historical priority are not asserted.
+We prove that, for every finite set of at least three distinct sites on an ellipse of semiaxes $0<b\le a$ with $a/b\le\sqrt{2/\sin(2\pi/5)-1}$, the sites can be ordered so that the first three form a triangle and each subsequent site is joined to \emph{exactly its two closest earlier sites}, with every edge retained and no two edges properly crossing. Equality in the aspect-ratio bound is included; no separation or cardinality restriction is imposed. The ordering uses Euclidean distance with Cartesian-lexicographic tie-breaking. The proof gives an algorithm constructing such an order in $O(n\log n)$ time and $O(n)$ auxiliary space in the exact real-arithmetic model. We also establish a necessary-and-sufficient recursive metric-ear criterion for strictly convex finite sets, elementary three- and four-site foundations, and a signed short-arc ellipse-chord inequality. In particular, the universally admissible ellipses include a noncircle of aspect ratio $101/100$. The displayed ratio bound is sufficient; sharpness and historical priority are not asserted.
 \end{abstract}
 
 \section{Introduction and main result}
@@ -47,7 +47,7 @@ For every $0<b\le a$ satisfying $a/b\le\Rbound$, and every finite set $S\subset\
 \caption{A \emph{validated} ten-site construction on the noncircular ellipse $a/b=101/100$. Labels $1$--$10$ give arrival order. The first triangle is drawn more boldly; all other segments are the two \emph{compulsory} nearest-predecessor edges at their respective arrivals, never chosen as optional noncrossing diagonals. All $2n-3=17$ edges have been retained. A deterministic 80-decimal-place checker confirms each nearest-two choice and checks every independent edge pair for proper crossing; see \texttt{scripts/figure-validation.json}.}\label{fig:headline}
 \end{figure}
 
-Three features merit emphasis: the nearest sites are selected among \emph{earlier}, not all, vertices; the conclusion applies to arbitrarily many arbitrarily close distinct sites; and the sufficient interval of allowed aspect ratios is closed. The argument relies on choosing a minimum \emph{Euclidean skip chord} among certain short two-gap arcs, not on simply removing the smallest angular gap. The latter tempting selection rule is false even at ratio $101/100$ (Section~\ref{sec:heuristic}).
+Three features merit emphasis: the nearest sites are selected among \emph{earlier}, not all, vertices; the conclusion applies to arbitrarily many arbitrarily close distinct sites; and the sufficient interval of allowed aspect ratios is closed. Moreover, the proof is algorithmic: the order can be recovered by recursive metric-ear deletion in $O(n\log n)$ time (Section~\ref{sec:algorithm}). The argument relies on choosing a minimum \emph{Euclidean skip chord} among certain short two-gap arcs, not on simply removing the smallest angular gap. The latter tempting selection rule is false even at ratio $101/100$ (Section~\ref{sec:heuristic}).
 
 The construction builds a maximal outerplanar graph on the boundary sites. Standard convex-polygon triangulation and greedy edge selection are classical, but they do not impose this particular mandatory predecessor rule. Relevant, distinct models include ordered one-nearest-neighbour graphs \citep{agoston2026}, ordered $\Theta$-graphs \citep{bose2004}, and greedy polygon triangulations \citep{levcopoulos1987,finlayson1992}. We do not claim the classical polygon-ear or outerplanar facts as original. A comprehensive historical priority determination has not been completed.
 
@@ -211,17 +211,51 @@ All non-neighbours therefore satisfy \eqref{eq:ear}, while both neighbours lie \
 Every finite distinct boundary subset is strictly convex. At each stage with at least five surviving sites, Lemma~\ref{lem:uniform} produces a strict metric ear on the \emph{same} ellipse, independent of the number or spacing of the survivors. Delete and repeat to four points, use Proposition~\ref{prop:four} for the final four-site order, and reverse the metric-ear deletions. Each reverse insertion uses precisely its two nearest earlier neighbours and adds only boundary sides; no old edges are removed and no proper crossing occurs. The full recursive certificate criterion in Theorem~\ref{thm:iff} gives the equivalent formulation. The closed ratio endpoint has already been used in \eqref{eq:keyineq}.
 \end{proof}
 
+
+\section{Constructing the order efficiently}\label{sec:algorithm}
+The metric-ear proof is constructive, not merely existential. In the notation of Lemma~\ref{lem:uniform}, an eligible site is one whose current cyclic-neighbour span satisfies $s_i<\Lambda$, and its priority is the squared Euclidean skip-chord length $L_i^2=\dist{v_{i-1}}{v_{i+1}}^2$. The squared length gives the same minimisers as $L_i$ and avoids square roots.
+
+\begin{proposition}[Algorithmic corollary]\label{prop:algorithm}
+Given $a\ge b>0$ with $a/b\le\Rbound$ and $n\ge3$ distinct Cartesian-coordinate sites on $\Ell$, a plane nearest-two order together with all its $2n-3$ compulsory edges can be constructed in $O(n\log n)$ time and $O(n)$ auxiliary space in the exact real-arithmetic comparison model.
+\end{proposition}
+
+\noindent\textbf{Algorithm (cyclic ear deletion and reversal).}
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=3pt]
+\item Sort the sites cyclically about the ellipse centre and put them into a circular doubly linked list.
+\item For each site in the current list, test eligibility $s_i<\Lambda$. Insert each eligible site into a min-priority queue keyed by $L_i^2$, breaking equal keys by Cartesian-lexicographic site coordinates.
+\item While more than four sites survive, extract a minimum-key eligible site $v_i$, record it together with its two current cyclic neighbours, and delete it from the circular list. Recompute eligibility and priority for its two surviving cyclic neighbours, updating their queue entries. Invalidated entries may instead be discarded lazily using version counters.
+\item Order the final three or four sites by Proposition~\ref{prop:four}, then append the recorded deleted sites in reverse deletion order, outputting their two stored compulsory neighbour edges as they are reinserted.
+\end{enumerate}
+
+\begin{proof}
+For every stage with at least five sites, equation~\eqref{eq:average} guarantees an eligible index. Lemma~\ref{lem:uniform} proves that a minimum Euclidean skip-chord candidate \emph{among eligible sites} is a strict metric ear. Thus step~3 always finds a valid deletion. The remaining set lies on the same ellipse and satisfies the same aspect-ratio bound. Proposition~\ref{prop:four} constructs the base order, and reversing the deletions inserts only the compulsory nearest-two hull sides, without crossing an old edge. Heap tie-breaking affects only which valid ear is removed; strictness relative to non-neighbours makes distance ties harmless.
+
+It remains to justify the running time without assuming an angular oracle. Write $q_i=((v_i)_x/a,(v_i)_y/b)$, so $q_i$ lies on the unit circle, and put
+\[
+ c_\Lambda=\cos\Lambda
+ =2\left(\frac{a^2-b^2}{a^2+b^2}\right)^2-1.
+\]
+Because $0<\Lambda\le\pi$ and $0<s_i<2\pi$, the eligibility test is exactly
+\begin{equation}\label{eq:algebraic-eligibility}
+ s_i<\Lambda
+ \quad\Longleftrightarrow\quad
+ \det(q_{i-1},q_{i+1})>0
+ \ \text{and}\ 
+ q_{i-1}\mathbin{\cdot}q_{i+1}>c_\Lambda.
+\end{equation}
+The determinant specifies the positively oriented arc of length less than $\pi$, and the dot product gives the remaining strict cutoff. In particular, equality at $s_i=\Lambda$ is \emph{ineligible}, as in the proof above. The initial cyclic sort can likewise be carried out with half-plane and determinant comparisons, without evaluating inverse trigonometric functions. All these tests, and the squared-distance priorities, use a constant number of exact real-arithmetic operations and comparisons.
+
+Deleting $v_i$ changes the cyclic neighbours, hence the eligibility and priority, of only its immediate surviving predecessor and successor. Each of the at most $n-4$ deletions therefore causes $O(1)$ queue updates. There are $O(n)$ total queue insertions and removals, each costing $O(\log n)$, and the initial cyclic sort costs $O(n\log n)$. The final three- or four-site construction, reversal, and output of all $2n-3$ edges cost $O(n)$ overall. The linked list, queue, deletion stack and output order each use $O(n)$ space. This is an exact real-arithmetic bound; no bit-complexity claim is made for arbitrary real input coordinates.
+\end{proof}
+
 \section{A noncircular universal corollary}\label{sec:corollary}
 \begin{corollary}\label{cor:nonround}
 On the noncircular ellipse $E(101/100,1)$, \emph{every} finite set of at least three distinct boundary sites admits a plane nearest-two order.
 \end{corollary}
 \begin{proof}
-Clearly $101/100>1$. To verify $101/100<\Rbound$ without decimals, use
-\[
- \sin^2(2\pi/5)=\frac{5+\sqrt5}{8}<\frac{15}{16}
- <\left(\frac{39}{40}\right)^2.
-\]
-Also $39/40<20000/20201=2/(1+(101/100)^2)$, since $39\cdot20201=787839<800000$. Thus $\sin(2\pi/5)<2/(1+(101/100)^2)$ and the desired strict aspect-ratio bound follows. Apply Theorem~\ref{thm:ellipse} for every finite boundary subset.
+The identity $\sin^2(2\pi/5)=(5+\sqrt5)/8$ gives
+$\sin(2\pi/5)<39/40<20000/20201=2/(1+(101/100)^2)$.
+Hence $1<101/100<\Rbound$, and Theorem~\ref{thm:ellipse} applies.
 \end{proof}
 
 \section{Why minimising angular span is not enough}\label{sec:heuristic}
@@ -261,7 +295,7 @@ The five precise mathematical statements have direct proofs in the public Lean n
 \texttt{clm0108\_exact} & \texttt{ExactNonround.lean}\\\bottomrule
 \end{tabular}
 \end{center}
-They formalise, respectively, Proposition~\ref{prop:four}, Theorem~\ref{thm:iff}, Lemma~\ref{lem:short}, Theorem~\ref{thm:ellipse}, and Corollary~\ref{cor:nonround}. The Lean semantics use real Cartesian points, squared Euclidean predecessor ranking with lexicographic ties, retained two-edge insertions, and open-segment planarity; see the machine-readable target definitions \citep{etshtsrepo}. These machine-checked proofs are distinct from historical originality, external mathematical peer review, or a Palomar-issued registration. \textbf{\PalomarRecordStatus.} A future verified versioned record will be linked at the single macro \verb|\PalomarRecordURL| once actually issued.
+They formalise, respectively, Proposition~\ref{prop:four}, Theorem~\ref{thm:iff}, Lemma~\ref{lem:short}, Theorem~\ref{thm:ellipse}, and Corollary~\ref{cor:nonround}. The Lean semantics use real Cartesian points, squared Euclidean predecessor ranking with lexicographic ties, retained two-edge insertions, and open-segment planarity; see the machine-readable target definitions \citep{etshtsrepo}. The algorithmic running-time analysis in Proposition~\ref{prop:algorithm} is a paper-level corollary of the constructive metric-ear proof, not a separately certified Lean complexity theorem. These machine-checked proofs are distinct from historical originality, external mathematical peer review, or a Palomar-issued registration. \textbf{\PalomarRecordStatus.} A future verified versioned record will be linked at the single macro \verb|\PalomarRecordURL| once actually issued.
 
 The bound $\Rbound$ is only a \emph{sufficient} closed range; the set of all successful aspect ratios, and sharpness of the displayed constant, are not settled here. Our recursion also does not assert a suitable order on arbitrary large convex site sets: the exact if-and-only-if ear certificate specifies when one exists. A previous internal literature review recorded an unresolved access gap concerning a 1992 convex greedy-triangulation paper and broader historical priority searches \citep{finlayson1992}. Citation overlap and proof priority require independent investigation; neither formalisation nor a successful local proof implies publication or external review.
 
