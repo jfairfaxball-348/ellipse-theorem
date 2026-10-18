@@ -1,5 +1,10 @@
 # Noncrossing Two-Nearest-Predecessor Orders on Nearly Circular Ellipses
 
+## S060 completed — full research manuscript and five validated figures (18 October 2026)
+
+The owner-authorised [S060 research manuscript](paper/main.tex) is complete as an **eight-page, locally compiled scholarly first draft**. It has five embedded reproducible mathematical vector figures, including an early ten-site noncrossing *verified* two-nearest-predecessor construction, metric ear, central competitor bands, all four-site cases, and a rigorously labelled counterexample to a false ear-selection heuristic **not** to the main theorem. [Paper build and figure instructions](paper/README.md); [validation and editorial review](paper/FINAL_REVIEW.md); [S060 closeout](sessions/S060/CLOSEOUT.md). The exact five frozen Lean theorem statements, Palomar source and machine-verification files remain unchanged. **Palomar registration is pending**; no invented record, external publication, claim of sharpness, historical priority, or peer review. S055 novelty: `INDETERMINATE_ACCESS_GAP`. S061 is **FUTURE / UNEXECUTED — TARGET NOT INSTALLED**, owner-steered; do not execute without owner direction.
+
+
 ## S059 — licensing and Palomar packaging complete; full predictive verdict awaits live machine report (16 October 2026)
 
 The owner invoked S059 and authorised Apache-2.0 for original owner-controlled project work. The root `LICENSE` contains the unmodified standard Apache 2.0 terms; `formalization.yaml` v0.4 carries the same SPDX id and the five-target public theorem abstract. A credential-free caller at `.github/workflows/palomar-full-predictive.yml` requests the pinned official `mode: full` verifier against the **exact push-to-main SHA**. Its machine report, not this document, decides readiness. A successful independent S058 `lake comparator` check is inherited evidence only. No registry submission, paper, or priority claim was made. S055 novelty: `INDETERMINATE_ACCESS_GAP`. S060 remains owner-steered with no substantive target.
