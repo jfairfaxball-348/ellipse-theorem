@@ -1,6 +1,6 @@
 # S060 — FUTURE / UNEXECUTED — WRITE THE COMPLETE RESEARCH PAPER WITH MULTIPLE MATHEMATICAL FIGURES
 
-**TARGET STATUS: OWNER_TARGET_INSTALLED. NOT EXECUTED.**
+**TARGET STATUS: INSTALLED BY OWNER. FUTURE / UNEXECUTED.**
 
 Repository: https://github.com/jfairfaxball-348/ellipse-theorem  
 Lean namespace: `ETSHTS`  
@@ -8,7 +8,7 @@ Owner direction (18 October 2026): Palomar registration is stalling; advance dir
 
 ## Execution authority and boundary
 
-This file installs **S060 only**. A **new explicit invocation** by the owner (including “Run next session”) authorises execution of S060; do **not** execute S060 as part of installation. Do not execute S061. The next session is **paper production**, not a mathematics-discovery, Lean proof-rewriting, Palomar registration, or arXiv-upload session. Preserve the frozen five theorem statements, all Lean proof files, original definitions, `formalization.yaml`, Comparator, and the existing Palomar candidate source SHA unless separately required for non-mathematical documentation. Palomar registration is **not** a precondition to draft completion.
+This file installs **S060 only**. A **new explicit owner invocation** by the owner (including “Run next session”) authorises execution of S060; do **not** execute S060 as part of installation. Do not execute S061. The next session is **paper production**, not a mathematics-discovery, Lean proof-rewriting, Palomar registration, or arXiv-upload session. Preserve the frozen five theorem statements, all Lean proof files, original definitions, `formalization.yaml`, Comparator, and the existing Palomar candidate source SHA unless separately required for non-mathematical documentation. Palomar registration is **not** a precondition to draft completion.
 
 ## Binding objective: a real paper, not an outline
 
