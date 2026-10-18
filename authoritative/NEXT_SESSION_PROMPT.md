@@ -1,5 +1,8 @@
 # S061 — FUTURE / UNEXECUTED — TARGET NOT INSTALLED
 
-S060 is the owner-authorised paper-writing session. The owner has **not** selected a substantive S061 target. This file is a neutral placeholder only, not authority to execute a session.
+**TARGET STATUS: NOT INSTALLED.**
+**NO EXECUTION AUTHORITY.**
 
-A separate owner direction is required to install the S061 objective; a later explicit invocation is required to execute it. No automatic Palomar submission, journal/arXiv submission, proof rewriting, novelty claim, or future mathematics programme is authorised.
+S060 is completed. S061 is a neutral owner-steered placeholder; the owner has not installed a target. A **new explicit owner invocation** is required to install any target, and a separate new explicit owner invocation is required to execute that target once installed. Until then no S061 work is authorised.
+
+Do not recommend or install a target automatically. No automatic Palomar registration, journal/arXiv submission, rewriting of frozen theorem statements or proofs, novelty certification, or publication is authorised.
