@@ -3,9 +3,9 @@ open Lake DSL
 
 package «ETSHTS» where
 
--- Immutable mathlib commit behind v4.15.0, verified on GitHub on 2026-10-14.
+-- Mathlib v4.35.0-rc3 release commit, paired with the Lean v4.35.0-rc3 toolchain.
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "56a005855ea17e0b0958f73ec801ae140b0a1679"
+  "https://github.com/leanprover-community/mathlib4" @ "c55e6e786f49471c72fbddbec5415808896aec1e"
 
 @[default_target]
 lean_lib ETSHTS where
