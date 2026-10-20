@@ -1,7 +1,7 @@
 name: Palomar official pinned full predictive verification (not registration)
 on:
   push:
-    branches: [main]
+    branches: [main, 'session/palomar-rc3-20261020']
   workflow_dispatch:
 
 permissions:
@@ -14,6 +14,6 @@ jobs:
       repository: jfairfaxball-348/ellipse-theorem
       commit: ${{ github.sha }}
       pipeline_commit: d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44
-      request_id: s059pfull001
+      request_id: s061rc3full1
       mode: full
       options: '{"comparator_config_path":"comparator.json","authorization_relationship":"I am a responsible author or maintainer"}'
