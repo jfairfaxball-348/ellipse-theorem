@@ -24,9 +24,17 @@ The algorithm is not the false shortest-angular-two-gap heuristic analysed in th
 
 The asymptotic bound is a **paper-level derivation of the proved constructive ear lemma**. It is not a separately formalised Lean running-time statement, not a floating-point numerical guarantee, and not a claim about the bit cost of arbitrary real arithmetic. The original five frozen Lean theorems and Palomar candidate are unchanged. The manuscript's `101/100` consequence is retained in abbreviated form.
 
-## Palomar placeholder
+## Palomar registration (22 October 2026)
 
-No Palomar record or registration is claimed. In `main.tex`, `\PalomarRecordStatus` currently displays **Palomar verification record: pending registration** and `\PalomarRecordURL` is a single non-link placeholder `[PALOMAR RECORD URL PENDING]`. Once the owner actually receives a verified versioned entry URL, replace the macro definition with the real URL and update the sentence in the verification section to issue `\url{\PalomarRecordURL}`. Do not replace the placeholder with a speculative ID.
+**The all-cardinality ellipse theorem is registered as [PALOMAR-2026-10-22-000027 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-22-000027&version=1).**
+
+- **Compared declaration:** `ETSHTS.clm0107_exact` (the main theorem); the four other proved direct declarations are **not separately selected** in this Palomar entry.
+- **Immutable registered source:** `4c9357026442675255c69bb823edf76a3f47cb86`.
+- **Independent verification:** Lean 4.35.0, NanoDa and con-ron. The automated review lists no problems.
+- **Scope:** the registered claim covers the uniform closed aspect-ratio bound, every finite cardinality at least three, compulsory Euclidean two-nearest-predecessor edges, and lexicographic distance-tie resolution. The paper's O(n log n) algorithmic analysis is not separately Lean-certified.
+- **Scholarly status:** Palomar registration establishes a versioned mechanical verification record, **not** human peer review, originality, or acceptance by a journal. The prior-art access gap identified in S055 remains open.
+
+The manuscript now cites the version-specific registration in its verification section and references. The Lean theorem statements and proofs were not changed by this paper-only editorial update.
 
 ## Proof-to-source alignment
 
