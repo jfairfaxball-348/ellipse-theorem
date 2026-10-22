@@ -1,0 +1,43 @@
+name: Build ellipse paper PDF
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/paper-pdf.yml
+      - paper/main.tex
+      - paper/figures/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-pictures texlive-fonts-recommended
+      - name: Compile paper
+        working-directory: paper
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          test -s main.pdf
+          pdfinfo main.pdf | grep -E 'Pages:|Page size:|File size:'
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ellipse-theorem-manuscript-pdf
+          path: paper/main.pdf
+          if-no-files-found: error
+      - name: Publish PDF on main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/main.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "paper: publish compiled PDF [skip ci]"
+            git push origin HEAD:main
+          fi
