@@ -1,0 +1,53 @@
+name: Build journal LaTeX source package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/paper-submission-source.yml
+      - paper/scripts/build_submission_package.py
+      - paper/main.tex
+      - paper/references.bib
+      - paper/figures/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build flat source package
+        run: python3 paper/scripts/build_submission_package.py
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-pictures texlive-fonts-recommended lmodern
+      - name: Test compiling from extracted ZIP
+        run: |
+          mkdir -p /tmp/ellipse-journal-tex
+          unzip -q paper/submission/ellipse-theorem-latex-source.zip -d /tmp/ellipse-journal-tex
+          cd /tmp/ellipse-journal-tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error ellipse-theorem.tex
+          test -s ellipse-theorem.pdf
+          ls -lh ellipse-theorem.pdf
+      - name: Upload source ZIP and compiled PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: computational-geometry-latex-source
+          path: |
+            paper/submission/ellipse-theorem.tex
+            paper/submission/ellipse-theorem-latex-source.zip
+            /tmp/ellipse-journal-tex/ellipse-theorem.pdf
+          if-no-files-found: error
+      - name: Publish submission source files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/submission/ellipse-theorem.tex paper/submission/ellipse-theorem-latex-source.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "paper: publish journal-ready flat LaTeX source archive [skip ci]"
+            git push origin HEAD:main
+          fi
