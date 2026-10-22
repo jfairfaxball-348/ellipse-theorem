@@ -2,11 +2,7 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "ETSHTS.clm0096_exact",
-    "ETSHTS.clm0099_exact",
-    "ETSHTS.clm0102_exact",
-    "ETSHTS.clm0107_exact",
-    "ETSHTS.clm0108_exact"
+    "ETSHTS.clm0107_exact"
   ],
   "definition_names": [
     "ETSHTS.Point",
@@ -23,19 +19,8 @@
     "ETSHTS.properCross",
     "ETSHTS.planeEdges",
     "ETSHTS.planeNearestTwoOrder",
-    "ETSHTS.orientation",
-    "ETSHTS.noThreeCollinear",
-    "ETSHTS.strictConvexPosition",
-    "ETSHTS.hullSide",
-    "ETSHTS.cyclicNeighbours",
-    "ETSHTS.metricEar",
-    "ETSHTS.lambda",
     "ETSHTS.R",
-    "ETSHTS.CLM0096",
-    "ETSHTS.CLM0099",
-    "ETSHTS.CLM0102",
-    "ETSHTS.CLM0107",
-    "ETSHTS.CLM0108"
+    "ETSHTS.CLM0107"
   ],
   "permitted_axioms": [
     "propext",
